@@ -27,11 +27,11 @@ assessmentButton.onclick = () =>
   tweetDivision.innerText = "";
   const anchor = document.createElement('a');
   const hrefValue =
-    'https://twitter.com/intent/tweet?button_hashtag=あなたのいいところ&ref_src=twsrc%5Etfw';
+    'https://twitter.com/intent/tweet?button_hashtag=あなたのいいところ&ref_src=twsrc%5Etfw'+encodeURIComponent("あなたのいいところ")+"&ref_src=twsrc%5Etfw";
 
   anchor.setAttribute('href', hrefValue);
   anchor.setAttribute('class', 'twitter-hashtag-button');
-  anchor.setAttribute('data-text', '診断結果の文章');
+  anchor.setAttribute('data-text', result);
   anchor.innerText = 'Tweet #あなたのいいところ';
 
   tweetDivision.appendChild(anchor);
@@ -39,6 +39,12 @@ assessmentButton.onclick = () =>
   script.setAttribute("src","https://platform.twitter.com/widgets.js");
   tweetDivision.appendChild(script);
 }
+userNameInput.onkeydown = event => {
+  if (event.key === 'Enter') {
+    assessmentButton.onclick();
+  }
+};
+
 const answers = 
 [
   '###userName###のいいところは声です。###userName###の特徴的な声は皆を惹きつけ、心に残ります。',
