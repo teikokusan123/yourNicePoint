@@ -78,9 +78,9 @@ function assessment(userName)
   const index = sumOfCharCode % answers.length;
   let result = answers[index];
   result = result.replaceAll('###userName###', userName);
-  if(userName === "藤井")
+  if(userName.includes("藤井"))
   {
-    result = "藤井のいいところはありません。藤井にはいいところなど存在しないのです";
+    result = userName + "のいいところはありません。" + userName + "にはいいところなど存在しないのです";
   }
   return result;
 }
