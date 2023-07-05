@@ -13,15 +13,29 @@ assessmentButton.onclick = () =>
     return;
   }
   
+  //診断エイリアの作成
   resultDivision.innerText = "";
-  const header = document.createElement("h3");
-  header.innerText = "診断結果"
-  resultDivision.appendChild(header);
-
-  const paragraph = document.createElement("p");
-  const result = assessment(userName);
-  paragraph.innerText = result;
-  resultDivision.appendChild(paragraph);
+    // headerDivision の作成
+    const headerDivision = document.createElement('div');
+    headerDivision.setAttribute('class', 'card-header text-bg-primary');
+    headerDivision.innerText = '診断結果';
+  
+    // bodyDivision の作成
+    const bodyDivision = document.createElement('div');
+    bodyDivision.setAttribute('class', 'card-body');
+  
+    const paragraph = document.createElement('p');
+    paragraph.setAttribute('class', 'card-text');
+    const result = assessment(userName);
+    paragraph.innerText = result;
+    bodyDivision.appendChild(paragraph);
+  
+    // resultDivision に Bootstrap のスタイルを適用する
+    resultDivision.setAttribute('class', 'card');
+  
+    // headerDivision と bodyDivision を resultDivision に差し込む
+    resultDivision.appendChild(headerDivision);
+    resultDivision.appendChild(bodyDivision);
 
   //ツイートエリアの作成
   tweetDivision.innerText = "";
@@ -30,7 +44,7 @@ assessmentButton.onclick = () =>
     'https://twitter.com/intent/tweet?button_hashtag=あなたのいいところ&ref_src=twsrc%5Etfw'+encodeURIComponent("あなたのいいところ")+"&ref_src=twsrc%5Etfw";
 
   anchor.setAttribute('href', hrefValue);
-  anchor.setAttribute('class', 'twitter-hashtag-button');
+  anchor.setAttribute('class', 'twitter-hashtag-button'); 1
   anchor.setAttribute('data-text', result);
   anchor.innerText = 'Tweet #あなたのいいところ';
 
@@ -43,7 +57,7 @@ userNameInput.onkeydown = event => {
   if (event.key === 'Enter') {
     assessmentButton.onclick();
   }
-};
+}
 
 const answers = 
 [
@@ -78,7 +92,7 @@ function assessment(userName)
   const index = sumOfCharCode % answers.length;
   let result = answers[index];
   result = result.replaceAll('###userName###', userName);
-  if(userName.includes("藤井") || userName.includes("fuji") || userName.includes("ふじ"))
+  if(userName.includes("藤井") || userName.includes("fuji") || userName.includes("ふじ"))//藤井の多様性を尊重
   {
     result = userName + "のいいところはありません。" + userName + "にはいいところなど存在しないのです。";
   }
